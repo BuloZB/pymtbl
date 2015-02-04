@@ -167,6 +167,25 @@ cdef class iteritems(object):
         return (PyString_FromStringAndSize(<char *> key, len_key),
                 PyString_FromStringAndSize(<char *> val, len_val))
 
+    def __prev__(self):
+        cdef mtbl_res res
+        cdef uint8_t *key
+        cdef uint8_t *val
+        cdef size_t len_key
+        cdef size_t len_val
+
+        if self._instance == NULL:
+            raise StopIteration
+
+        with nogil:
+            res = mtbl_iter_prev(self._instance, &key, &len_key, &val, &len_val)
+
+        if res == mtbl_res_failure:
+            raise StopIteration
+
+        return (PyString_FromStringAndSize(<char *> key, len_key),
+                PyString_FromStringAndSize(<char *> val, len_val))
+
 cdef get_iterkeys(parent, mtbl_iter *instance):
     it = iterkeys(parent)
     it._instance = instance

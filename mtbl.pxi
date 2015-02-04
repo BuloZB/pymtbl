@@ -42,6 +42,7 @@ cdef extern from "mtbl.h":
     # iter
     void mtbl_iter_destroy(mtbl_iter **) nogil
     mtbl_res mtbl_iter_next(mtbl_iter *, uint8_t **, size_t *, uint8_t **, size_t *) nogil
+    mtbl_res mtbl_iter_prev(mtbl_iter *, uint8_t **, size_t *, uint8_t **, size_t *) nogil
 
     # source
     mtbl_iter *mtbl_source_iter(mtbl_source *) nogil
