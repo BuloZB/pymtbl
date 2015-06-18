@@ -347,6 +347,22 @@ cdef class reader(DictMixin):
         return get_iteritems(self, mtbl_source_get_prefix(
             mtbl_reader_source(self._instance), key, len_key))
 
+    def start_prefix(self, bytes py_key):
+        """
+        R.start_prefix(key_prefix) -> a dumb iterator starting at prefix key_prefix.
+        """
+        cdef mtbl_res res
+        cdef uint8_t *key
+        cdef size_t len_key
+
+        self.check_initialized()
+
+        key = <uint8_t *> PyString_AsString(py_key)
+        len_key = PyString_Size(py_key)
+
+        return get_iteritems(self, mtbl_source_start_prefix(
+            mtbl_reader_source(self._instance), key, len_key))
+
     def __getitem__(self, bytes py_key):
         cdef mtbl_iter *it
         cdef mtbl_res res

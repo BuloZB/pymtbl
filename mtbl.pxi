@@ -49,6 +49,7 @@ cdef extern from "mtbl.h":
     mtbl_iter *mtbl_source_get(mtbl_source *, uint8_t *, size_t) nogil
     mtbl_iter *mtbl_source_get_range(mtbl_source *, uint8_t *, size_t, uint8_t *, size_t) nogil
     mtbl_iter *mtbl_source_get_prefix(mtbl_source *, uint8_t *, size_t) nogil
+    mtbl_iter *mtbl_source_start_prefix(mtbl_source *, uint8_t *, size_t) nogil
     mtbl_res mtbl_source_write(mtbl_source *, mtbl_writer *) nogil
 
     # reader
